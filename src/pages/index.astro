@@ -1,11 +1,51 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+export const prerender = true;
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "Fernie Insider";
+const description =
+  "Local perspective on homes, ski-hill shifts, and what I'd actually watch.";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+
+  <body style="margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;">
+    <main style="max-width: 980px; margin: 54px auto; padding: 0 18px;">
+      <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
+        <div style="flex:1 1 520px;">
+          <h1 style="margin:0 0 10px; letter-spacing:-0.02em;">Fernie Insider</h1>
+          <p style="margin:0 0 18px; opacity:0.78; font-size: 1.05rem; line-height:1.5;">
+            Weekly notes on what’s moving - and what’s not - in Fernie real estate.
+            Less hype. More signal.
+          </p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="/issue/001"
+               style="display:inline-block; padding:10px 12px; border-radius:12px; text-decoration:none; border:1px solid rgba(0,0,0,.16);">
+              Read the latest
+            </a>
+            <a href="/about"
+               style="display:inline-block; padding:10px 12px; border-radius:12px; text-decoration:none; border:1px solid rgba(0,0,0,.16); opacity:.9;">
+              About
+            </a>
+          </div>
+        </div>
+
+        <div style="flex:0 1 340px; padding:14px; border-radius:16px; border:1px solid rgba(0,0,0,.12); background: rgba(0,0,0,.03);">
+          <div style="font-weight:600; margin-bottom:8px;">What you’ll get</div>
+          <ul style="margin:0; padding-left:18px; opacity:0.86; line-height:1.55;">
+            <li>Sales that explain the market</li>
+            <li>New listings - what stands out</li>
+            <li>Reductions, expiries, cancellations</li>
+            <li>One thing I’d watch next week</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
