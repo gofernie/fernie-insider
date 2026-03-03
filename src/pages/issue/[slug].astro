@@ -1,0 +1,911 @@
+---
+import Layout from "../../layouts/layout.astro";
+
+export const prerender = true;
+
+const siteTitle = "Fernie Insider";
+
+export function getStaticPaths() {
+  // Newest first
+  // ✅ Paste this whole issues array back into getStaticPaths()
+// Adds: “New listings worth noting” under “Sales…” in the main column
+// Also: all 9 issues rewritten (titles/deks/signals/sections) - no other code changes needed.
+
+const issues = [
+  {
+    slug: "009",
+    number: "009",
+    date: "Feb 27, 2026",
+    readTime: "4 min read",
+    title: "Inventory arrived - closings didn’t follow.",
+    dek:
+      "Ten new listings hit the feed, but only two closed. One sold fast and over ask. The other needed a haircut to get done.",
+    signals: [
+      "10 new listings - 2 sales closed",
+      "Sales outcomes: 1 over ask, 1 under ask",
+      "1 expired, 0 cancelled",
+      "Watch list: homes that price clean from day one",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Feb 27, 2026. The market looked busy on the surface - new inventory, tours, chatter.
+          But the close rate didn’t follow. Ten new listings arrived and only two sales made it to the finish line.
+          That gap is the story: more choice, but the same disciplined buyer.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>A-1091 4TH Avenue</strong> - <strong>$762,500</strong> (listed $729,500) - <strong>17 DOM</strong></li>
+          <li><strong>642B-4559 Timberline Crescent</strong> - <strong>$112,000</strong> (listed $114,900) - <strong>3 DOM</strong></li>
+        </ul>
+        <p>
+          Small sample, but useful. One outcome was rewarded (fast, clean, and priced to create urgency).
+          The other needed a little give to get across the line. Buyers are still acting - just not guessing.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Ten new listings is enough volume to change what buyers compare against.
+          The listings that win attention early usually do three things: they read clean online, they’re easy to view, and the number feels fair without a story.
+          When inventory rises, “almost priced right” stops working - buyers simply move on to the next option.
+        </p>
+        <ul>
+          <li><strong>Early winners:</strong> sharp photos, no friction, and a price that matches the ask - not the hope.</li>
+          <li><strong>Early losers:</strong> awkward access, winter uncertainty, or a number that assumes spring psychology in February.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Homes that price clean from day one. If new inventory keeps arriving without matching sales,
+          the market usually forces price discovery - quietly at first, then all at once.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          I’m less interested in “busy” and more interested in “what got rewarded”.
+          When something sells quickly (or over ask), it usually removed friction - price, condition, access, uncertainty.
+          Everything else is waiting for clarity.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "008",
+    number: "008",
+    date: "Feb 20, 2026",
+    readTime: "4 min read",
+    title: "Condos moved - the math was simple.",
+    dek:
+      "Two condo sales, same signal - buyers will act when the number feels fair and the decision doesn’t require optimism.",
+    signals: [
+      "5 new listings - 2 sales closed",
+      "Sales outcomes: 1 at ask, 1 under ask",
+      "1 expired, 0 cancelled",
+      "1 relist detected (address repeat)",
+      "Watch list: condos that actually pencil as rentals",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Feb 20, 2026. This was a “quiet but honest” week - fewer new listings, two condo closings,
+          and one relist popping back up. Buyers weren’t absent. They were selective, and they chose the units where
+          the numbers were easiest to live with.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>103-1500 McDonald Avenue</strong> - <strong>$550,000</strong> (listed $550,000) - <strong>22 DOM</strong></li>
+          <li><strong>305-51 Ridgemont Drive</strong> - <strong>$335,000</strong> (listed $339,000) - <strong>7 DOM</strong></li>
+        </ul>
+        <p>
+          One met the market clean. The other needed a small concession to feel fair. That’s the theme:
+          buyers are willing - but they’re not paying extra to “see what happens”.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          With five new listings, this was more of a “quality over quantity” week.
+          The listings that earned attention quickly were the ones that didn’t ask buyers to solve problems.
+        </p>
+        <ul>
+          <li><strong>Condos:</strong> the ones that feel rentable or easy to own keep showing best.</li>
+          <li><strong>Everything else:</strong> if it needs a narrative, it usually needs a better number too.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Condos that actually pencil as rentals. If those keep clearing while detached lags,
+          affordability is choosing for the market.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          When buyers can’t justify the delta, they don’t stretch - they wait.
+          Price clarity beats marketing every time.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "007",
+    number: "007",
+    date: "Feb 13, 2026",
+    readTime: "5 min read",
+    title: "The long tail cleared - but only at a discount.",
+    dek:
+      "Three sales, all under original list. Buyers showed up, but they didn’t pay 2022 premiums to do it.",
+    signals: [
+      "3 new listings - 3 sales closed",
+      "Sales outcomes: 3 under ask",
+      "Watch list: listings with winter access and low friction",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Feb 13, 2026. New listings and solds matched - but the pricing story didn’t.
+          Every sale closed under original list. That’s not panic. It’s the market insisting on value.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>532 6th Avenue</strong> - <strong>$907,000</strong> (listed $940,000) - <strong>112 DOM</strong></li>
+          <li><strong>42-9773 Stephenson Road</strong> - <strong>$350,476</strong> (listed $368,000) - <strong>13 DOM</strong></li>
+          <li><strong>1230-1232-1200 Riverside Way</strong> - <strong>$525,000</strong> (listed $560,000) - <strong>85 DOM</strong></li>
+        </ul>
+        <p>
+          These are “eventual yes” sales. They happen after the market tests the original number, then the seller meets reality.
+          When you see DOM this long, the price wasn’t discovered on day one - it was discovered over time.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Only three new listings this week, which means each one gets more scrutiny.
+          In lower-volume weeks, buyers compare harder - because they can.
+        </p>
+        <ul>
+          <li><strong>Low-friction listings</strong> (easy to view, clean details) keep earning first looks.</li>
+          <li><strong>Anything ambiguous</strong> (access, condition, unknown costs) gets “saved” instead of bought.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Listings with winter access and low friction. In a disciplined market,
+          uncertainty is expensive - it pushes buyers back to the sidelines.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          The market isn’t dead. It’s disciplined.
+          Buyers are willing - but only when the property removes uncertainty.
+          If you’re selling, your job is to reduce friction, not to tell a story.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "006",
+    number: "006",
+    date: "Feb 6, 2026",
+    readTime: "4 min read",
+    title: "One clean sale - and the reset signals showed up.",
+    dek:
+      "A light close week with a fast sale over ask, plus more expiries and a cancellation in the background.",
+    signals: [
+      "5 new listings - 1 sale closed",
+      "Sales outcomes: 1 over ask",
+      "2 expired, 1 cancelled",
+      "Watch list: properties that will reappear as relists",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Feb 6, 2026. More inventory arrived than the sold side can absorb,
+          and the reset signals showed up - expiries and a cancellation.
+          That’s usually the market saying sellers are testing, then recalibrating.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>1082 5th Avenue</strong> - <strong>$741,450</strong> (listed $715,000) - <strong>15 DOM</strong></li>
+        </ul>
+        <p>
+          One sale doesn’t make a trend, but it does show what still works:
+          a clean offer to the market gets rewarded, even when everything else is slow.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Five new listings is enough to create “better options” psychology.
+          In weeks like this, buyers often tour - then hesitate - because there’s no penalty for waiting.
+        </p>
+        <ul>
+          <li><strong>Priced right:</strong> still draws urgency.</li>
+          <li><strong>Priced as a test:</strong> usually earns DOM first, then a relist later.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Properties that will reappear as relists. If they come back at the same number, expect the same result.
+          If they reset, they often move quickly.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          Strong outcomes are specific - not general.
+          One good sale doesn’t mean everything is good. It means one property removed friction faster than the rest.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "005",
+    number: "005",
+    date: "Jan 30, 2026",
+    readTime: "4 min read",
+    title: "Contracts showed up - the sold story lagged.",
+    dek:
+      "Nothing closed on paper, but three deals went firm. This is what a lag week looks like in real time.",
+    signals: [
+      "6 new listings - 0 sales closed",
+      "3 deals went firm (pending)",
+      "Watch list: next week’s solds - do they close tight or discounted?",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Jan 30, 2026. No closings, but activity still happened - this was a lag week.
+          Contracts and closings don’t line up week-to-week. The “sold” story often arrives a week or two later.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<p>No sales closed this week, but contracts did show up.</p>
+        <ul>
+          <li><strong>3120 Copeland Avenue</strong> - under contract (listed $559,000)</li>
+          <li><strong>570 5th Avenue</strong> - under contract (listed $799,000)</li>
+          <li><strong>2E-2461 Eagle Drive</strong> - under contract (listed $469,000)</li>
+        </ul>
+        <p>
+          This is where the market’s heartbeat shows up first - not in solds, but in what actually goes firm.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Six new listings landed into a week with zero closings, which shifts leverage toward buyers.
+          More choice plus no “proof” of closes often slows decision-making.
+        </p>
+        <ul>
+          <li><strong>Buyers:</strong> compare harder and negotiate more confidently.</li>
+          <li><strong>Sellers:</strong> need to earn urgency with price, not hope.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Next week’s solds - they’ll tell you if buyers stretched.
+          Tight to list reads like confidence. Discounted closes read like discipline.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          People forget that “sold data” is delayed data. The market can feel busy even when closings look slow.
+          Watch the contract flow - then see what price the market actually accepts.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "004",
+    number: "004",
+    date: "Jan 23, 2026",
+    readTime: "4 min read",
+    title: "Relists are back - buyers have memory.",
+    dek:
+      "One ski-hill sale closed well under original list, and relists started to show up again. The market remembers the old number.",
+    signals: [
+      "7 new listings - 1 sale closed",
+      "Sales outcomes: 1 under ask",
+      "0 expired, 1 cancelled",
+      "2 relists detected (address repeat)",
+      "Watch list: addresses that reset price meaningfully on relist",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Jan 23, 2026. New listings kept arriving, but the close count stayed thin.
+          The real signal was relists: when an address comes back, buyers bring memory - and they price it accordingly.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>122-5258 Highline Drive</strong> - <strong>$782,000</strong> (listed $875,000) - <strong>105 DOM</strong></li>
+        </ul>
+        <p>
+          This is a “reset” close. The market didn’t negotiate a little - it insisted on a different reality.
+          Long DOM plus a meaningful discount is usually price discovery, not drama.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Seven new listings is enough to refresh the comparison set for buyers.
+          In that environment, relists have an extra problem: buyers already know what didn’t work last time.
+        </p>
+        <ul>
+          <li><strong>Relists that reset:</strong> can move quickly.</li>
+          <li><strong>Relists that don’t:</strong> usually just restart the clock.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Addresses that reset price on relist. A meaningful reset often compresses DOM fast.
+          A cosmetic reset usually just extends the timeline.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          Relists tell you where sellers are finally meeting reality - or trying to outrun it.
+          Buyers remember the old number. If you want a different outcome, you need a different offer to the market.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "003",
+    number: "003",
+    date: "Jan 16, 2026",
+    readTime: "4 min read",
+    title: "Winter market - deals needed a concession.",
+    dek:
+      "Two closings, both under list, while expiries quietly piled up. Buyers stayed disciplined and got paid for it.",
+    signals: [
+      "3 new listings - 2 sales closed",
+      "Sales outcomes: 2 under ask",
+      "2 expired, 0 cancelled",
+      "1 relist detected (address repeat)",
+      "Watch list: mid-range homes where buyers are still choosy",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Jan 16, 2026. The winter market showed its usual shape: fewer listings, fewer buyers,
+          and deals that need a price concession to actually happen. Expiries ticked up too - quiet, but meaningful.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>120-1500 MCDONALD Avenue</strong> - <strong>$305,000</strong> (listed $319,000) - <strong>60 DOM</strong></li>
+          <li><strong>7471 1st Avenue</strong> - <strong>$582,000</strong> (listed $599,000) - <strong>25 DOM</strong></li>
+        </ul>
+        <p>
+          Both are “disciplined” closes. Nothing irrational. Just buyers insisting the number make sense for January.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Only three new listings arrived, so they didn’t have to compete with much.
+          But in winter, buyers still filter hard: access, condition, and certainty matter more than “potential”.
+        </p>
+        <ul>
+          <li><strong>Clean + easy:</strong> gets viewed quickly.</li>
+          <li><strong>Complicated:</strong> gets bookmarked for “later”.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Mid-range homes where buyers are still choosy. If sellers price like spring, buyers respond like winter.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          In January, certainty matters more than potential.
+          Buyers want clean access, clean terms, and a number that doesn’t require optimism.
+          If you’re selling, clarity beats patience.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "002",
+    number: "002",
+    date: "Jan 9, 2026",
+    readTime: "4 min read",
+    title: "Small week - same buyer discipline.",
+    dek:
+      "One sale under ask and multiple expiries. Buyers are watching, not chasing, and sellers who don’t adjust are timing out.",
+    signals: [
+      "2 new listings - 1 sale closed",
+      "Sales outcomes: 1 under ask",
+      "2 expired, 0 cancelled",
+      "1 relist detected (address repeat)",
+      "Watch list: the next real reductions",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Jan 9, 2026. Very small numbers - but the pattern stayed consistent:
+          buyers aren’t chasing, and sellers who don’t adjust are timing out.
+          Expiries are the quiet signal that “wait it out” is getting expensive.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>19-5423 Boomerang Way</strong> - <strong>$615,000</strong> (listed $629,900) - <strong>62 DOM</strong></li>
+        </ul>
+        <p>
+          When buyers can buy something similar without stretching, they don’t stretch.
+          They negotiate - or they wait.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Two new listings isn’t much, but in a small week every listing gets compared against the entire active market.
+          If the number is even slightly off, buyers have no urgency to engage.
+        </p>
+        <ul>
+          <li><strong>Fair:</strong> earns showings.</li>
+          <li><strong>Optimistic:</strong> earns time.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          The next real reductions. When buyers don’t respond to “small” cuts,
+          the next move usually has to be meaningful.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          The market is telling you what it values: clarity and fairness.
+          When sellers treat price as a suggestion, buyers treat the listing as optional.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+
+  {
+    slug: "001",
+    number: "001",
+    date: "Jan 2, 2026",
+    readTime: "5 min read",
+    title: "Year-end cleanup - expiries everywhere.",
+    dek:
+      "A heavy expiry week and one steep discount sale. That’s what year-end shakeout looks like when sellers run out of runway.",
+    signals: [
+      "1 new listing - 1 sale closed",
+      "Sales outcomes: 1 under ask",
+      "12 expired, 2 cancelled",
+      "Watch list: which homes re-list quickly in January",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `<p>
+          Week ending Jan 2, 2026. This is the year-end housekeeping week: lots of listings simply ran out of runway,
+          and the system cleaned them up. Expiries don’t mean “bad property” - they usually mean “wrong price for the moment”.
+        </p>`,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `<ul>
+          <li><strong>892 9th Avenue</strong> - <strong>$925,000</strong> (listed $1,150,000) - <strong>40 DOM</strong></li>
+        </ul>
+        <p>
+          A hard reset sale. When the gap is that wide, the market isn’t negotiating - it’s correcting.
+        </p>`,
+      },
+      {
+        h: "New listings worth noting",
+        html: `<p>
+          Only one new listing arrived, which means the “new supply” story wasn’t the driver - cleanup was.
+          January relists are usually the tell: who learned, who didn’t, and who is still anchored to the old number.
+        </p>
+        <ul>
+          <li><strong>Fast relists with a reset:</strong> often move early.</li>
+          <li><strong>Relists without change:</strong> often repeat the same timeline.</li>
+        </ul>`,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `<p style="margin:0;">
+          Which homes re-list quickly in January. Relists tell you what sellers learned -
+          and whether they changed anything that matters.
+        </p>`,
+      },
+      {
+        h: "My take",
+        html: `<p>
+          The cleanest narrative is in the unglamorous stuff: expiries, relists, and the sales that only happen after a meaningful reset.
+          That’s where price discovery lives.
+        </p>
+        <p style="opacity:.78; margin-top:10px;">
+          Written for locals - and for people trying to understand Fernie without the noise.
+        </p>`,
+      },
+    ],
+  },
+];
+
+  return issues.map((issue, idx) => {
+    const newer = idx > 0 ? issues[idx - 1] : null;
+    const older = idx < issues.length - 1 ? issues[idx + 1] : null;
+
+    return {
+      params: { slug: issue.slug },
+      props: { issue, newer, older },
+    };
+  });
+}
+
+const { issue, newer, older } = Astro.props;
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{`Issue ${issue.number} - ${siteTitle}`}</title>
+    <meta name="description" content={issue.dek} />
+  </Fragment>
+
+  <style>
+    /* ✅ Globals (bg, font, tokens, links) live in layout.astro */
+
+    .wrap{
+      max-width: var(--max);
+      margin: 34px auto 60px;
+      padding: 0 18px;
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(0,0,0,.10);
+      margin: 14px 0 0;
+    }
+
+    .kicker{
+      font-size:.78rem;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      opacity:.68;
+      margin: 22px 0 8px;
+    }
+
+    h1{
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+      line-height: 1.14;
+      font-size: 2.05rem;
+      font-weight: 700;
+      max-width: 72ch;
+    }
+
+    .dek{
+      margin: 0 0 12px;
+      opacity:.82;
+      font-size: 1.06rem;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .metaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      opacity:.68;
+      font-size:.95rem;
+      margin-bottom: 18px;
+    }
+
+    .dot{
+      width:4px; height:4px;
+      border-radius:999px;
+      background: rgba(0,0,0,.32);
+      display:inline-block;
+      margin-top: 9px;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 920px){
+      .layout{
+        grid-template-columns: 1.9fr 1fr;
+        align-items:start;
+      }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .section{
+      padding: 18px;
+      border-top: 1px solid rgba(0,0,0,.06);
+    }
+    .section:first-child{ border-top: 0; }
+
+    .section p{
+      margin: 0;
+      line-height: 1.75;
+      font-size: 1.02rem;
+      opacity: .92;
+    }
+
+    .section p + p{ margin-top: 10px; }
+
+    .section ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      line-height: 1.7;
+      opacity:.92;
+    }
+
+    .section li{ margin: 0 0 6px; }
+    .section strong{ font-weight: 700; }
+
+    .callout{
+      background: rgba(213, 193, 162, .22);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .callout h2{ margin-bottom: 8px; }
+
+    .rail .block{ padding: 18px; }
+    .rail .block + .block{ border-top: 1px solid rgba(0,0,0,.06); }
+
+    .railTitle{
+      font-size: .95rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+
+    .rail ul{
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.7;
+      opacity: .92;
+    }
+
+    .rail li{ margin: 0 0 6px; }
+
+    /* ✅ button-sized */
+    .formRow{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 10px;
+    }
+    @media (min-width:560px){
+      .formRow{
+        flex-direction:row;
+        align-items:stretch;
+      }
+    }
+
+    .input{
+      flex:1 1 auto;
+      min-width:0;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size: 1rem;
+      outline:none;
+    }
+    .input:focus{ box-shadow: 0 0 0 3px rgba(0,0,0,.06); }
+
+    .submit{
+      flex:0 0 auto;
+      width:auto;
+      white-space:nowrap;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.03);
+      font-weight: 650;
+      cursor: pointer;
+      text-align:center;
+    }
+
+    .small{
+      margin-top: 8px;
+      font-size:.92rem;
+      opacity:.70;
+      line-height:1.35;
+    }
+
+    .bottomNav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
+
+    .navLink{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.02);
+      text-decoration:none;
+      color:inherit;
+    }
+    .navLink:hover{ background: rgba(0,0,0,.04); }
+  </style>
+
+  <main class="container page">
+    <div class="divider"></div>
+
+    <div class="kicker">{`Issue ${issue.number}`}</div>
+    <h1>{issue.title}</h1>
+    <p class="dek">{issue.dek}</p>
+
+    <div class="metaRow">
+      <span>{issue.date}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{issue.readTime}</span>
+    </div>
+
+    <div class="layout">
+      <section class="card">
+        {issue.sections.map((s) => (
+          <div class="section">
+            {s.tone === "callout" ? (
+              <div class="callout">
+                <h2>{s.h}</h2>
+                <div set:html={s.html}></div>
+              </div>
+            ) : (
+              <>
+                <h2>{s.h}</h2>
+                <div set:html={s.html}></div>
+              </>
+            )}
+          </div>
+        ))}
+      </section>
+
+      <aside class="card rail">
+        <div class="block">
+          <div class="railTitle">Key signals</div>
+          <ul>
+            {issue.signals.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="railTitle">Get the weekly text</div>
+          <div style="opacity:.86; line-height:1.45;">
+            One message when a new issue lands.
+          </div>
+
+          <form method="POST" action="/api/subscribe" class="formRow">
+            <input
+              class="input"
+              type="tel"
+              name="phone"
+              inputmode="tel"
+              autocomplete="tel"
+              placeholder="Your mobile number"
+              required
+            />
+            <button class="submit" type="submit">Keep me posted</button>
+          </form>
+
+          <div class="small">
+            By submitting, you agree to receive occasional SMS updates. Reply STOP to unsubscribe.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="bottomNav">
+      {older ? (
+        <a class="navLink" href={`/issue/${older.slug}`}>← Previous</a>
+      ) : (
+        <span class="navLink" style="opacity:.40; cursor:default;">← Previous</span>
+      )}
+
+      {newer ? (
+        <a class="navLink" href={`/issue/${newer.slug}`}>Next →</a>
+      ) : (
+        <span class="navLink" style="opacity:.40; cursor:default;">Next →</span>
+      )}
+
+      <a class="navLink" href="/issue/archive">All issues</a>
+    </div>
+  </main>
+</Layout>

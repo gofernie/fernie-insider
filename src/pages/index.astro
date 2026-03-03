@@ -1,51 +1,344 @@
 ---
+import Layout from "../layouts/layout.astro";
+
 export const prerender = true;
 
-const title = "Fernie Insider";
+const siteTitle = "Fernie Insider";
 const description =
   "Local perspective on homes, ski-hill shifts, and what I'd actually watch.";
+
+const HERO_IMG =
+  "https://imagedelivery.net/Az3x6Ld2gouPPtikaqezkQ/5ea01d06-640e-47de-cffe-9c895294cf00/hero";
+
+const issues = [
+  {
+    slug: "003",
+    number: "003",
+    date: "Feb 27, 2026",
+    title: "Inventory is rising - sales are not.",
+    dek:
+      "A week where the market felt busy, but the close rate didn’t follow. A few price cuts mattered. Most didn’t.",
+  },
+  {
+    slug: "002",
+    number: "002",
+    date: "Feb 20, 2026",
+    title: "Condos moved - price did the work.",
+    dek:
+      "Three apartment sales, mostly at or slightly under ask. The tell was one Riverside unit that didn’t move until price did.",
+  },
+  {
+    slug: "001",
+    number: "001",
+    date: "Feb 13, 2026",
+    title: "The long tail is still clearing - slowly.",
+    dek:
+      "A mix week. A long-sitting acreage and a lot finally cleared. Buyers are active, but selective.",
+  },
+];
+
+const latest = issues[0];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+<Layout>
+  <Fragment slot="head">
+    <title>{siteTitle}</title>
     <meta name="description" content={description} />
-  </head>
+  </Fragment>
 
-  <body style="margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;">
-    <main style="max-width: 980px; margin: 54px auto; padding: 0 18px;">
-      <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
-        <div style="flex:1 1 520px;">
-          <h1 style="margin:0 0 10px; letter-spacing:-0.02em;">Fernie Insider</h1>
-          <p style="margin:0 0 18px; opacity:0.78; font-size: 1.05rem; line-height:1.5;">
+  <style>
+    /* ✅ Globals (bg, font, ink, links, box-sizing, tokens) live in layout.astro */
+
+    .wrap{
+      max-width: var(--max);
+      margin: 34px auto 60px;
+      padding: 0 18px;
+    }
+
+    /* TOP NAV (aligned to container) */
+    
+    /* HERO */
+    .hero{
+      margin-top: 18px;
+      border-radius: 22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .hero::before{
+      content:"";
+      display:block;
+      aspect-ratio:16/9;
+    }
+
+    @media (max-width:760px){
+      .hero::before{ aspect-ratio:1/1; }
+    }
+
+    .hero img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .heroOverlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:flex-end;
+      padding:18px;
+      background: linear-gradient(to top, rgba(0,0,0,.52), rgba(0,0,0,0) 60%);
+    }
+
+    .heroH1{
+      margin:0;
+      color:white;
+      font-size:2.7rem;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      line-height:1.06;
+      text-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    /* LAYOUT */
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 920px){
+      .layout{
+        grid-template-columns: 1.9fr 1fr;
+        align-items:start;
+      }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* ✅ no horizontal rules / borders inside cards */
+    .section{
+      padding: 18px;
+      border-top: 0;
+    }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .lead{
+      margin:0;
+      opacity:.82;
+      font-size:1.06rem;
+      line-height:1.6;
+      max-width:72ch;
+    }
+
+    /* FORM */
+    .formRow{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 10px;
+    }
+
+    @media (min-width:560px){
+      .formRow{
+        flex-direction:row;
+        align-items:stretch;
+      }
+    }
+
+    .input{
+      flex:1 1 auto;
+      min-width:0;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:1rem;
+      outline:none;
+    }
+    .input:focus{
+      box-shadow: 0 0 0 3px rgba(0,0,0,.06);
+    }
+
+    .submit{
+      flex:0 0 auto;
+      width:auto;
+      white-space:nowrap;
+      padding:11px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.03);
+      font-weight:650;
+      cursor:pointer;
+    }
+
+    .small{
+      margin-top:8px;
+      font-size:.92rem;
+      opacity:.70;
+      line-height:1.35;
+    }
+
+    .kicker{
+      font-size:.78rem;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      opacity:.68;
+      margin: 0 0 10px;
+    }
+
+    .previews{
+      display:grid;
+      gap:12px;
+    }
+
+    @media (min-width:760px){
+      .previews{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .previewCard{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .meta{
+      font-size:.95rem;
+      opacity:.68;
+      margin-bottom: 6px;
+    }
+
+    .ptitle{
+      font-weight:650;
+      letter-spacing:-0.01em;
+      margin:0 0 6px;
+      line-height:1.25;
+    }
+
+    .pdek{
+      margin:0;
+      opacity:.84;
+      line-height:1.5;
+    }
+
+    .navLink{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.02);
+      text-decoration:none;
+      color:inherit;
+    }
+
+    ul{
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.7;
+      opacity: .92;
+    }
+  </style>
+
+  <main class="container page">
+   
+
+    <section class="hero" aria-label="Fernie Insider hero">
+      <img src={HERO_IMG} alt="Fernie mountain scene" loading="eager" />
+      <div class="heroOverlay">
+        <h1 class="heroH1">Fernie Insider</h1>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="card">
+        <div class="section">
+          <p class="lead">
             Weekly notes on what’s moving - and what’s not - in Fernie real estate.
-            Less hype. More signal.
+            Quietly tracking the signal.
           </p>
+        </div>
 
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a href="/issue/001"
-               style="display:inline-block; padding:10px 12px; border-radius:12px; text-decoration:none; border:1px solid rgba(0,0,0,.16);">
-              Read the latest
-            </a>
-            <a href="/about"
-               style="display:inline-block; padding:10px 12px; border-radius:12px; text-decoration:none; border:1px solid rgba(0,0,0,.16); opacity:.9;">
-              About
-            </a>
+        <div class="section">
+          <h2>Text updates. No noise.</h2>
+          <div style="opacity:.86;">
+            Drop your number - I’ll text you when a new issue lands.
+          </div>
+
+          <form method="POST" action="/api/subscribe" class="formRow">
+            <input
+              class="input"
+              type="tel"
+              name="phone"
+              inputmode="tel"
+              autocomplete="tel"
+              placeholder="Your mobile number"
+              required
+            />
+            <button class="submit" type="submit">Keep me posted</button>
+          </form>
+
+          <div class="small">
+            By submitting, you agree to receive occasional SMS updates. Reply STOP to unsubscribe.
           </div>
         </div>
 
-        <div style="flex:0 1 340px; padding:14px; border-radius:16px; border:1px solid rgba(0,0,0,.12); background: rgba(0,0,0,.03);">
-          <div style="font-weight:600; margin-bottom:8px;">What you’ll get</div>
-          <ul style="margin:0; padding-left:18px; opacity:0.86; line-height:1.55;">
+        <div class="section">
+          <div class="kicker">Recent issues</div>
+
+          <div class="previews">
+            {issues.slice(0,3).map((i) => (
+              <a class="card previewCard" href={`/issue/${i.slug}`}>
+                <div class="section" style="padding:16px;">
+                  <div class="meta">Issue {i.number} - {i.date}</div>
+                  <div class="ptitle">{i.title}</div>
+                  <p class="pdek">{i.dek}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="section">
+          <h2>What you’ll get</h2>
+          <ul>
             <li>Sales that explain the market</li>
             <li>New listings - what stands out</li>
             <li>Reductions, expiries, cancellations</li>
             <li>One thing I’d watch next week</li>
           </ul>
         </div>
-      </div>
-    </main>
-  </body>
-</html>
+
+        <div class="section">
+          <h2>Latest issue</h2>
+          <div class="meta">
+            Issue {latest.number} - {latest.date}
+          </div>
+          <a class="navLink" href={`/issue/${latest.slug}`}>
+            {latest.title}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+</Layout>

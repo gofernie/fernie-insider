@@ -1,0 +1,224 @@
+---
+import Layout from "../../layouts/layout.astro";
+
+export const prerender = true;
+
+const siteTitle = "Fernie Insider";
+
+// ✅ keep this array in sync with your [slug] page for now
+const issues = [
+  {
+    slug: "003",
+    number: "003",
+    date: "Feb 27, 2026",
+    readTime: "4 min read",
+    title: "Inventory is rising - sales are not.",
+    dek:
+      "A week where the market felt busy, but the close rate didn’t follow. A few price cuts mattered. Most didn’t.",
+    signals: [
+      "3 new listings priced “optimistically” - 0 serious bites",
+      "2 reductions that actually reset expectations",
+      "Buyer activity looks selective, not absent",
+      "Watch list: homes with clean snow management and true parking",
+    ],
+    sections: [
+      {
+        h: "What happened",
+        html: `
+          <p>
+            This week looked busy on the surface - more chatter, more tours, more saves.
+            But the market still feels selective. The deals that moved were the ones that
+            removed friction: realistic pricing, clean access, and no “mystery costs”.
+          </p>
+        `,
+      },
+      {
+        h: "Sales that explain the market",
+        html: `
+          <p>
+            One sale went over ask - but it wasn’t magic. It was a clean property, clean
+            showing flow, and a price that didn’t require buyers to do mental gymnastics.
+            The rest of the activity stayed cautious.
+          </p>
+        `,
+      },
+      {
+        h: "Next week I’m watching",
+        tone: "callout",
+        html: `
+          <p style="margin:0;">
+            Whether the new inventory actually converts - or just adds to the pile.
+            If we see reductions without buyer response, that tells you pricing is still
+            ahead of reality.
+          </p>
+        `,
+      },
+      {
+        h: "My take",
+        html: `
+          <p>
+            The market isn’t “dead”. It’s disciplined. Buyers are willing - but only when
+            the property removes uncertainty. If you’re selling, your job is to reduce friction,
+            not to tell a story.
+          </p>
+          <p style="opacity:.78; margin-top:10px;">
+            Written for locals - and for people trying to understand Fernie without the noise.
+          </p>
+        `,
+      },
+    ],
+  },
+  // ... keep 002, 001 here if you want older/newer buttons
+];
+
+const issue = issues[0];
+const newer = null;
+const older = issues[1] ?? null;
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{`Latest - ${siteTitle}`}</title>
+    <meta name="description" content={issue.dek} />
+    <link rel="canonical" href={`/issue/${issue.slug}`} />
+  </Fragment>
+
+  <style>
+    .wrap{ max-width: var(--max); margin: 34px auto 60px; padding: 0 18px; }
+
+    .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 16px; }
+    .brand{ font-weight:650; letter-spacing:-0.01em; }
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; opacity:.92; font-size:.95rem; }
+    .pill{ display:inline-block; padding:8px 10px; border-radius:999px; border:1px solid var(--line); background: rgba(255,255,255,.72); }
+
+    .divider{ height:1px; background: rgba(0,0,0,.10); margin: 14px 0 0; }
+
+    .kicker{ font-size:.78rem; letter-spacing:.10em; text-transform: uppercase; opacity:.68; margin: 22px 0 8px; }
+
+    h1{ margin: 0 0 10px; letter-spacing: -0.02em; line-height: 1.14; font-size: 2.05rem; font-weight: 700; max-width: 72ch; }
+    .dek{ margin: 0 0 12px; opacity:.82; font-size: 1.06rem; line-height: 1.6; max-width: 70ch; }
+
+    .metaRow{ display:flex; gap:10px; flex-wrap:wrap; opacity:.68; font-size:.95rem; margin-bottom: 18px; }
+    .dot{ width:4px; height:4px; border-radius:999px; background: rgba(0,0,0,.32); display:inline-block; margin-top: 9px; }
+
+    .layout{ display:grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 920px){ .layout{ grid-template-columns: 1.9fr 1fr; align-items:start; } }
+
+    .card{ border:1px solid var(--line); background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; }
+
+    h2{ margin: 0 0 8px; font-size: 1.05rem; font-weight: 750; letter-spacing: -0.01em; }
+
+    .section{ padding: 18px; border-top: 1px solid rgba(0,0,0,.06); }
+    .section:first-child{ border-top: 0; }
+
+    .section p{ margin: 0; line-height: 1.75; font-size: 1.02rem; opacity: .92; }
+    .section p + p{ margin-top: 10px; }
+
+    .section ul{ margin: 10px 0 0; padding-left: 18px; line-height: 1.7; opacity:.92; }
+    .section li{ margin: 0 0 6px; }
+    .section strong{ font-weight: 700; }
+
+    .callout{ background: rgba(213, 193, 162, .22); border: 1px solid rgba(0,0,0,.10); border-radius: 14px; padding: 14px; margin-top: 10px; }
+    .callout h2{ margin-bottom: 8px; }
+
+    .rail .block{ padding: 18px; }
+    .rail .block + .block{ border-top: 1px solid rgba(0,0,0,.06); }
+
+    .railTitle{ font-size: .95rem; font-weight: 750; letter-spacing: -0.01em; margin: 0 0 10px; }
+    .rail ul{ margin: 0; padding-left: 18px; line-height: 1.7; opacity: .92; }
+    .rail li{ margin: 0 0 6px; }
+
+    .formRow{ display:flex; flex-direction:column; gap:10px; margin-top: 10px; }
+    @media (min-width:560px){ .formRow{ flex-direction:row; align-items:stretch; } }
+
+    .input{ flex:1 1 auto; min-width:0; padding: 11px 12px; border-radius: 12px; border:1px solid var(--line); background:#fff; font-size: 1rem; outline:none; }
+    .input:focus{ box-shadow: 0 0 0 3px rgba(0,0,0,.06); }
+
+    .submit{ flex:0 0 auto; width:auto; white-space:nowrap; padding: 11px 14px; border-radius: 12px; border:1px solid var(--line); background: rgba(0,0,0,.03); font-weight: 650; cursor: pointer; text-align:center; }
+
+    .small{ margin-top: 8px; font-size:.92rem; opacity:.70; line-height:1.35; }
+
+    .bottomNav{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px; }
+    .navLink{ display:inline-block; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background: rgba(0,0,0,.02); }
+    .navLink:hover{ background: rgba(0,0,0,.04); }
+  </style>
+
+  <main class="container page">
+    <div class="top">
+      <div class="brand"><a href="/">{siteTitle}</a></div>
+      <nav class="nav">
+        <a class="pill" href="/issue">Latest</a>
+        <a class="pill" href="/issue/archive">Archive</a>
+        <a class="pill" href="/about">About</a>
+      </nav>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="kicker">Latest issue</div>
+    <h1>{issue.title}</h1>
+    <p class="dek">{issue.dek}</p>
+
+    <div class="metaRow">
+      <span>{issue.date}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{issue.readTime}</span>
+    </div>
+
+    <div class="layout">
+      <section class="card">
+        {issue.sections.map((s) => (
+          <div class="section">
+            {s.tone === "callout" ? (
+              <div class="callout">
+                <h2>{s.h}</h2>
+                <div set:html={s.html}></div>
+              </div>
+            ) : (
+              <>
+                <h2>{s.h}</h2>
+                <div set:html={s.html}></div>
+              </>
+            )}
+          </div>
+        ))}
+      </section>
+
+      <aside class="card rail">
+        <div class="block">
+          <div class="railTitle">Key signals</div>
+          <ul>
+            {issue.signals.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="railTitle">Get the weekly text</div>
+          <div style="opacity:.86; line-height:1.45;">
+            One message when a new issue lands.
+          </div>
+
+          <form method="POST" action="/api/subscribe" class="formRow">
+            <input class="input" type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" required />
+            <button class="submit" type="submit">Keep me posted</button>
+          </form>
+
+          <div class="small">
+            By submitting, you agree to receive occasional SMS updates. Reply STOP to unsubscribe.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="bottomNav">
+      <span class="navLink" style="opacity:.40; cursor:default;">← Previous</span>
+      {older ? (
+        <a class="navLink" href={`/issue/${older.slug}`}>Next →</a>
+      ) : (
+        <span class="navLink" style="opacity:.40; cursor:default;">Next →</span>
+      )}
+      <a class="navLink" href="/issue/archive">All issues</a>
+      <a class="navLink" href={`/issue/${issue.slug}`} style="opacity:.78;">Permalink</a>
+    </div>
+  </main>
+</Layout>

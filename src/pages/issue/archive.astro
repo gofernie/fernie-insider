@@ -1,0 +1,123 @@
+---
+import Layout from "../../layouts/layout.astro";
+
+export const prerender = true;
+
+const issues = [
+  { slug: "003", number: "003", date: "Feb 27, 2026", title: "A clean over-ask sale - and a lot of land.", dek: "One detached sale went over ask quickly. The rest of the week was mainly new land inventory and one notable expiry." },
+  { slug: "002", number: "002", date: "Feb 20, 2026", title: "Condos moved - price did the work.", dek: "Three apartment sales, mostly at or slightly under ask. One long-run Riverside unit finally cleared at a meaningful discount." },
+  { slug: "001", number: "001", date: "Feb 13, 2026", title: "The long tail is still clearing - slowly.", dek: "A mix week - acreage and a long-sitting lot finally sold, plus a detached sale that took time. Buyers are active, but selective." },
+];
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>Archive - Fernie Insider</title>
+
+    <style>
+      .wrap{
+        max-width: var(--max);
+        margin:40px auto 60px;
+        padding:0 18px;
+      }
+
+      .top{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        margin-bottom:18px;
+      }
+
+      .brand{
+        font-weight:700;
+        letter-spacing:-0.02em;
+      }
+
+      .nav{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        opacity:.92;
+        font-size:.96rem;
+      }
+
+      .pill{
+        display:inline-block;
+        padding:8px 10px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background: rgba(255,255,255,.7);
+      }
+
+      .divider{
+        height:1px;
+        background: rgba(0,0,0,.10);
+        margin: 14px 0 0;
+      }
+
+      h1{
+        margin: 26px 0 8px;
+        font-size: 1.6rem;
+        letter-spacing:-0.02em;
+      }
+
+      .list{
+        display:grid;
+        gap:12px;
+        margin-top: 18px;
+      }
+
+      .card{
+        border:1px solid var(--line);
+        background: var(--card);
+        border-radius:var(--radius);
+        padding:16px;
+        display:block;
+      }
+
+      .meta{
+        opacity:.72;
+        font-size:.92rem;
+        margin-bottom:6px;
+      }
+
+      .title{
+        font-weight:700;
+        margin:0 0 6px;
+      }
+
+      .dek{
+        margin:0;
+        opacity:.86;
+        line-height:1.5;
+      }
+    </style>
+  </Fragment>
+
+  <main class="w<main class="container page"></main>rap">
+    <div class="top">
+      <div class="brand">
+        <a href="/">Fernie Insider</a>
+      </div>
+      <nav class="nav">
+        <a class="pill" href="/issue">Latest</a>
+        <a class="pill" href="/about">About</a>
+      </nav>
+    </div>
+
+    <div class="divider"></div>
+
+    <h1>Archive</h1>
+
+    <div class="list">
+      {issues.map((i) => (
+        <a class="card" href={`/issue/${i.slug}`}>
+          <div class="meta">Issue {i.number} - {i.date}</div>
+          <div class="title">{i.title}</div>
+          <p class="dek">{i.dek}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
